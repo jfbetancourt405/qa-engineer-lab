@@ -1,0 +1,118 @@
+{
+  "info": {
+    "_postman_id": "001875fe-56ba-41fe-b634-fcd3193cd00b",
+    "name": "QA Engineer API Lab",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39943253"
+  },
+  "item": [
+    {
+      "name": "Get Users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "pm.test(\"Users list is not empty\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.length).to.be.above(0);\r",
+              "});\r",
+              "pm.test(\"First user has id\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData[0]).to.have.property(\"id\");\r",
+              "});\r",
+              "pm.test(\"First user has name\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData[0]).to.have.property(\"name\");\r",
+              "});\r",
+              "pm.test(\"First user has email\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData[0]).to.have.property(\"email\");\r",
+              "});\r",
+              "pm.test(\"User id is number\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData[0].id).to.be.a(\"number\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/users",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User Not Found",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response time is below 2000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is an empty object\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.be.an(\"object\");\r",
+              "    pm.expect(Object.keys(jsonData)).to.have.lengthOf(0);\r",
+              "});\r",
+              "pm.test(\"Response body is empty\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "    pm.expect(Object.keys(jsonData).length).to.eql(0);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/users/9999",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "users",
+            "9999"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
