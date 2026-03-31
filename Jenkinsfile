@@ -10,14 +10,14 @@ pipeline {
         }
 
         stage('Run API Tests') {
-            steps {
-                bat 'newman run api-testing/user-service-tests.postman_collection.json'
-            }
+        steps {
+        bat 'npx newman run api-testing/user-service-tests.postman_collection.json'
+        }
         }
 
         stage('Generate Report') {
             steps {
-                bat 'npx newman run api-testing/user-service-tests.postman_collection.json -r html --reporter-html-export newman/jenkins-report.html'
+                bat 'newman run api-testing/user-service-tests.postman_collection.json -r html --reporter-html-export newman/jenkins-report.html'
             }
         }
 
