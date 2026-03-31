@@ -17,7 +17,7 @@ pipeline {
 
         stage('Generate Report') {
             steps {
-                bat 'newman run api-testing/user-service-tests.postman_collection.json -r html --reporter-html-export newman/jenkins-report.html'
+                bat 'npx newman run api-testing/user-service-tests.postman_collection.json -r html --reporter-html-export newman/jenkins-report.html'
             }
         }
 
